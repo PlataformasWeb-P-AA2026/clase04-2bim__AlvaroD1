@@ -1,0 +1,42 @@
+{% extends "master.html" %}
+
+{% block title %}
+Listado de Estudiantes
+{% endblock %}
+
+{% block content %}
+
+<h3>Número de estudiantes {{ numero_estudiantes }}</h3>
+
+<table id="tabla_estudiantes">
+
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Telefono</th>
+      <th>Tipo de telefono</th>
+      <th>Operadora</th>
+      <th>Editar</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for t in telefonos %}
+    <tr>
+      <td>{{ t.estudiante.nombre }}</td>
+      <td>{{ t.telefono }}</td>
+      <td>{{ t.tipo }}</td>
+      <td>{{ t.obtener_operadora }}</td>
+      <td><a href="{% url 'editar_numero_telefonico' t.id %}">editar</a></td>
+    </tr>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#tabla_estudiantes').DataTable();
+  });
+</script>
+{% endblock %}
