@@ -52,6 +52,11 @@ class NumeroTelefonicoForm(ModelForm):
     class Meta:
         model = NumeroTelefonico
         fields = ['telefono', 'tipo', 'estudiante']
+        labels = {
+            'telefono': _('Ingrese número telefónico'),
+            'tipo': _('Ingrese tipo de teléfono'),
+            'estudiante': _('Ingrese estudiante'),
+        }
 
 
 class NumeroTelefonicoEstudianteForm(ModelForm):
