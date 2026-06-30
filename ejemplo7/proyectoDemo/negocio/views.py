@@ -8,10 +8,10 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 # importar las clases de models.py
-from negocio.models import Chef, Plato, Restaurante
+from negocio.models import Chef, Plato, Restaurante, Comentario
 
 # importar los formularios de forms.py
-from negocio.forms import RestauranteForm, ChefForm, PlatoForm
+from negocio.forms import RestauranteForm, ChefForm, PlatoForm, ComentarioForm
 
 def ingreso(request):
 
@@ -151,3 +151,20 @@ def ver_plato(request, id):
     informacion_template = {'objeto': plato}
     return render(request, 'ver_plato.html',
                   informacion_template)
+
+@login_required(login_url='/entrando/login/')
+def crear_comentario(request):
+    """
+    """
+    usuario = request.user
+    if request.method=='POST':
+        formulario = ComentarioForm(usuario, request.POST)
+        print(formulario.errors)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(index)
+    else:
+        formulario = ComentarioForm(usuario)
+    diccionario = {'formulario': formulario, 'usuario': usuario}
+
+    return render(request, 'crear_comentario.html', diccionario)

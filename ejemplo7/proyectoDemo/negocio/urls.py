@@ -27,4 +27,7 @@ urlpatterns = [
          name='ver_chef'),
         path('ver/plato/<int:id>', views.ver_plato,
          name='ver_plato'),
+        # comentarios
+        path('crear/comentario', views.crear_comentario,
+         name='crear_comentario'),
 ]
