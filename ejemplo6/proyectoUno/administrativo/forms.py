@@ -58,7 +58,6 @@ class NumeroTelefonicoForm(ModelForm):
             'estudiante': _('Ingrese estudiante'),
         }
 
-
 class NumeroTelefonicoEstudianteForm(ModelForm):
 
     def __init__(self, estudiante, *args, **kwargs):
@@ -70,3 +69,21 @@ class NumeroTelefonicoEstudianteForm(ModelForm):
     class Meta:
         model = NumeroTelefonico
         fields = ['telefono', 'tipo', 'estudiante']
+
+
+class ContactoForm(ModelForm):
+    class Meta:
+        model = Contacto
+        fields = ['username', 'correo', 'comentario']
+        widgets = {
+            'comentario': forms.Textarea(
+                attrs={'rows': 5, 
+                'class': 'form-control'})
+        }
+
+    def clean_comentario(self):
+        valor = self.cleaned_data['comentario']
+        if len(valor) < 25:
+            raise forms.ValidationError("El comentario debe tener al menos 25 caracteres")
+        return valor
+

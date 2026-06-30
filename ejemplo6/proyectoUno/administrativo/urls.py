@@ -25,4 +25,7 @@ urlpatterns = [
         path('crear/numero/telefonico/estudiante/<int:id>', 
             views.crear_numero_telefonico_estudiante, 
             name='crear_numero_telefonico_estudiante'),
+        # contacto
+        path('contacto', views.contacto, name='contacto'),
  ]
+
